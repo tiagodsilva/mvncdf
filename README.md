@@ -1,16 +1,13 @@
 ## MVN CDF
 
-Often, a useful decomposition of the covariance matrix (e.g., Cholesky) is available. However, most MVN CDF implementations, e.g., scipy and PyTorch, can only receive the full covariance matrix, which is internally (and redundantly) decomposed. 
+Often, a useful decomposition of the covariance matrix (e.g., Cholesky) is available. However, most MVN CDF implementations, e.g., scipy and PyTorch, can only receive the full covariance matrix, which is internally (and redundantly) decomposed.
 
-This is not an issue when the MVN CDF is evaluated just a couple of times during an experiment. Nonetheless, when probing the MVN CDF thousands of times per minute, this becames a bottleneck. 
-
+This is not an issue when the MVN CDF is evaluated just a couple of times during an experiment. Nonetheless, when probing the MVN CDF thousands of times per minute, this becames a bottleneck.
 
 ```
 Elapsed time for qmc_mvn_cdf: 54.136833ms
 Result for qmc_mvn_cdf: 133.7890625
 --------------------------------
-
-
 Elapsed time for scipy_mvn_cdf: 168809.674916ms
 Result for scipy_mvn_cdf: 135.1777601695129
 --------------------------------
