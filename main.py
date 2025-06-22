@@ -2,11 +2,13 @@ import os
 import time
 import json
 import tqdm
+import argparse
 
 import numpy as np
 import jax.numpy as jnp
 import tensorflow as tf
 import torch
+
 from mvn_scipy import scipy_mvn_cdf
 from mvn_qmc import qmc_mvn_cdf, qmc_mvn_cdf_without_cholesky
 from mvn_tf import tf_mvn_cdf
@@ -14,6 +16,18 @@ from mvn_jax import mvn_cdf_jax
 from mvn_torch import mvn_cdf_torch, mvn_cdf_torch_jit
 
 from functools import reduce
+
+
+def create_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--min_dim", type=int, default=1)
+    parser.add_argument("--max_dim", type=int, default=8)
+    parser.add_argument("--repeat_per_dim", type=int, default=10)
+    parser.add_argument("--repeat_per_function", type=int, default=10)
+
+    parser.add_argument("--run_only_dim", type=int, default=None)
+
+    return parser
 
 
 def time_function(f, repeat=100, verbose=True):
@@ -144,4 +158,15 @@ def main(
 
 
 if __name__ == "__main__":
+    parser = create_parser()
+    args = parser.parse_args()
+
+    if args.run_only_dim is not None:
+        compare_functions_on_dim(
+            dim=args.run_only_dim,
+            repeat_per_function=args.repeat_per_function,
+            verbose=True,
+        )
+        exit(0)
+
     main(verbose=False, data_dir="data")
