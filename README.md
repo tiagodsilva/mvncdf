@@ -31,3 +31,5 @@ Result for mvn_cdf_torch_jit: 26.7
 ```
 
 `scipy`'s implementation is blazingly fast for bivariate distributions, but scales very poorly with the dimension. Changes on the parameters (e.g., number of points for the numerical integration) could reduce its runtime, but this would require careful tuning of a parameter with unpredictable effects.
+
+Please refer to [notebooks/plot_results.ipynb](./notebooks/plot_results.ipynb) for detailed results.
